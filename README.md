@@ -1,4 +1,3 @@
-"""
 Elevator Simulator - Backend Challenge
 
 What this is:
@@ -28,4 +27,4 @@ Notes / assumptions:
 - The elevator only knows the range of floors defined when it was created.
 
 Author: Michael Luo
-"""
+
