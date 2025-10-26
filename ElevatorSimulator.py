@@ -1,19 +1,18 @@
-# elevator_simulator.py
-
 class Elevator:
     def __init__(self, lowest_floor=1, highest_floor=10, start_floor=1, door_open_time=3):
+        # Set the bounds of the building
         self.lowest_floor = lowest_floor
         self.highest_floor = highest_floor
-        self.current_floor = start_floor
+        self.current_floor = start_floor # Where the elevator starts
 
         self.direction = 0   # 1 = going up, -1 = going down, 0 = idle
         self.state = "IDLE"  # could be "IDLE", "MOVING", or "DOORS_OPEN"
 
-        self.up_queue = set()
-        self.down_queue = set()
+        self.up_queue = set()   # Floors requested in each direction
+        self.down_queue = set() # Floors requested in each direction
 
-        self.door_timer = 0
-        self.door_open_time = door_open_time
+        self.door_timer = 0     # Time remaining for doors to stay open
+        self.door_open_time = door_open_time # Time doors stay open
 
     def request(self, floor):
         """Handle a floor request from either inside or outside the elevator."""
@@ -26,12 +25,10 @@ class Elevator:
         elif floor < self.current_floor:
             self.down_queue.add(floor)
         else:
-            # already here, just open doors
             self.state = "DOORS_OPEN"
             self.door_timer = self.door_open_time
 
         if self.state == "IDLE":
-            # pick an initial direction
             if self.up_queue:
                 self.direction = 1
             elif self.down_queue:
